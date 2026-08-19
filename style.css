@@ -137,15 +137,13 @@ a{color:var(--amber);}
   .navlist{
     display:flex;
     flex-direction:row;
+    flex-wrap:wrap;
     gap:6px;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    justify-content:center;
   }
-  .navlist::-webkit-scrollbar{display:none;}
   .navlist li{flex-shrink:0;}
   .navlist li+li{margin-top:0;}
-  .navlist button{width:auto;white-space:nowrap;padding:9px 12px;font-size:13px;}
+  .navlist button{width:auto;white-space:nowrap;padding:8px 11px;font-size:12.5px;}
   .navlist button .dot{display:none;}
   .menu-btn{display:none;}
   .overlay{display:none !important;}
