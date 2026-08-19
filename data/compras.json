@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-19T02:45:21.307Z",
+  "lastUpdated": null,
   "days": [
     {
       "day": "04/09 — Sexta",
@@ -8,13 +8,9 @@
         {
           "key": "04-jantar-chegada",
           "title": "Jantar de chegada",
-          "tag": "sem álcool",
+          "tag": "",
           "calm": true,
-          "hints": [
-            "Pão de forma",
-            "Frios (presunto, queijo)",
-            "Macarrão instantâneo ou marmita (opcional)"
-          ],
+          "hints": ["Pão de forma", "Frios (presunto, queijo)", "Macarrão instantâneo ou marmita (opcional)"],
           "highlight": null,
           "text": ""
         }
@@ -29,65 +25,34 @@
           "title": "Café da manhã",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Pão francês",
-            "Presunto",
-            "Queijo prato / mussarela",
-            "Manteiga",
-            "Café em pó",
-            "Leite",
-            "Suco Del Valle (caixinha)",
-            "Frutas"
-          ],
+          "hints": ["Pão francês", "Presunto", "Queijo prato / mussarela", "Manteiga", "Café em pó", "Leite", "Suco Del Valle (caixinha)", "Frutas"],
           "highlight": null,
-          "text": "asdfasdfasdf"
+          "text": ""
         },
         {
           "key": "05-praia",
           "title": "Praia",
-          "tag": "+ álcool",
+          "tag": "",
           "calm": false,
-          "hints": [
-            "Cerveja",
-            "Cachaça",
-            "Limão",
-            "Açúcar"
-          ],
+          "hints": ["Cerveja", "Cachaça", "Limão", "Açúcar"],
           "highlight": null,
           "text": ""
         },
         {
           "key": "05-almoco",
           "title": "Almoço",
-          "tag": "álcool opcional",
+          "tag": "",
           "calm": false,
-          "hints": [
-            "Pão de forma",
-            "Frios (peito de peru, queijo)",
-            "Salada (alface, tomate)",
-            "Arroz, feijão ou massa rápida"
-          ],
+          "hints": ["Pão de forma", "Frios (peito de peru, queijo)", "Salada (alface, tomate)", "Arroz, feijão ou massa rápida"],
           "highlight": "🍫 Mousse de chocolate — quantidade GRANDE, não esquecer!",
           "text": ""
         },
         {
           "key": "05-jantar",
           "title": "Jantar",
-          "tag": "churrasco + álcool",
+          "tag": "churrasco",
           "calm": false,
-          "hints": [
-            "Picanha",
-            "Fraldinha ou alcatra",
-            "Linguiça toscana",
-            "Coração de frango ou coxinha da asa",
-            "Pão de alho",
-            "Queijo coalho",
-            "Carvão",
-            "Sal grosso",
-            "Vinagrete (tomate, cebola, pimentão, vinagre, azeite)",
-            "Cerveja",
-            "Vinho (opcional)"
-          ],
+          "hints": ["Picanha", "Fraldinha ou alcatra", "Linguiça toscana", "Coração de frango ou coxinha da asa", "Pão de alho", "Queijo coalho", "Carvão", "Sal grosso", "Vinagrete (tomate, cebola, pimentão, vinagre, azeite)", "Cerveja", "Vinho (opcional)"],
           "highlight": null,
           "text": ""
         }
@@ -102,30 +67,16 @@
           "title": "Café da manhã",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Pão francês",
-            "Presunto",
-            "Queijo prato / mussarela",
-            "Manteiga",
-            "Café em pó",
-            "Leite",
-            "Suco Del Valle (caixinha)",
-            "Frutas"
-          ],
+          "hints": ["Pão francês", "Presunto", "Queijo prato / mussarela", "Manteiga", "Café em pó", "Leite", "Suco Del Valle (caixinha)", "Frutas"],
           "highlight": null,
           "text": ""
         },
         {
           "key": "06-praia",
           "title": "Praia",
-          "tag": "+ álcool",
+          "tag": "",
           "calm": false,
-          "hints": [
-            "Cerveja",
-            "Cachaça",
-            "Limão",
-            "Açúcar"
-          ],
+          "hints": ["Cerveja", "Cachaça", "Limão", "Açúcar"],
           "highlight": null,
           "text": ""
         },
@@ -134,33 +85,16 @@
           "title": "Almoço",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Pão de forma",
-            "Frios (peito de peru, queijo)",
-            "Salada (alface, tomate)",
-            "Arroz, feijão ou massa rápida"
-          ],
+          "hints": ["Pão de forma", "Frios (peito de peru, queijo)", "Salada (alface, tomate)", "Arroz, feijão ou massa rápida"],
           "highlight": null,
           "text": ""
         },
         {
           "key": "06-jantar",
           "title": "Jantar",
-          "tag": "churrasco + álcool",
+          "tag": "churrasco",
           "calm": false,
-          "hints": [
-            "Picanha",
-            "Fraldinha ou alcatra",
-            "Linguiça toscana",
-            "Coração de frango ou coxinha da asa",
-            "Pão de alho",
-            "Queijo coalho",
-            "Carvão",
-            "Sal grosso",
-            "Vinagrete (tomate, cebola, pimentão, vinagre, azeite)",
-            "Cerveja",
-            "Vinho (opcional)"
-          ],
+          "hints": ["Picanha", "Fraldinha ou alcatra", "Linguiça toscana", "Coração de frango ou coxinha da asa", "Pão de alho", "Queijo coalho", "Carvão", "Sal grosso", "Vinagrete (tomate, cebola, pimentão, vinagre, azeite)", "Cerveja", "Vinho (opcional)"],
           "highlight": null,
           "text": ""
         }
@@ -175,30 +109,16 @@
           "title": "Café da manhã",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Pão francês",
-            "Presunto",
-            "Queijo prato / mussarela",
-            "Manteiga",
-            "Café em pó",
-            "Leite",
-            "Suco Del Valle (caixinha)",
-            "Frutas"
-          ],
+          "hints": ["Pão francês", "Presunto", "Queijo prato / mussarela", "Manteiga", "Café em pó", "Leite", "Suco Del Valle (caixinha)", "Frutas"],
           "highlight": null,
           "text": ""
         },
         {
           "key": "07-praia",
           "title": "Praia",
-          "tag": "+ álcool",
+          "tag": "",
           "calm": false,
-          "hints": [
-            "Cerveja",
-            "Cachaça",
-            "Limão",
-            "Açúcar"
-          ],
+          "hints": ["Cerveja", "Cachaça", "Limão", "Açúcar"],
           "highlight": null,
           "text": ""
         },
@@ -207,24 +127,16 @@
           "title": "Almoço",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Pão de forma",
-            "Frios (peito de peru, queijo)",
-            "Salada (alface, tomate)",
-            "Arroz, feijão ou massa rápida"
-          ],
+          "hints": ["Pão de forma", "Frios (peito de peru, queijo)", "Salada (alface, tomate)", "Arroz, feijão ou massa rápida"],
           "highlight": null,
           "text": ""
         },
         {
           "key": "07-jantar",
           "title": "Jantar",
-          "tag": "leve, sem álcool",
+          "tag": "",
           "calm": true,
-          "hints": [
-            "Pão de forma",
-            "Frios"
-          ],
+          "hints": ["Pão de forma", "Frios"],
           "highlight": null,
           "text": ""
         }
@@ -239,14 +151,7 @@
           "title": "Água, gelo e outros",
           "tag": "",
           "calm": false,
-          "hints": [
-            "Água mineral",
-            "Refrigerante",
-            "Gelo",
-            "Copos descartáveis",
-            "Guardanapos",
-            "Sacos de lixo"
-          ],
+          "hints": ["Água mineral", "Refrigerante", "Gelo", "Copos descartáveis", "Guardanapos", "Sacos de lixo"],
           "highlight": null,
           "text": ""
         }
