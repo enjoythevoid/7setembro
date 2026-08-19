@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Editar lista — Itanhaém</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+
+<!-- ====== EDIT CONFIG — Pedro preenche isso antes de publicar ====== -->
+<script>
+  const CFG = {
+    owner: 'enjoythevoid',        // dono do repositório
+    repo: '7setembro',            // nome do repositório
+    branch: 'main',
+    path: 'data/compras.json'
+  };
+</script>
+<!-- =================================================================== -->
+
+<div id="gate" class="gate" style="display:none">
+  <h2>Lista de compras — editar</h2>
+  <p id="gateMsg">Cole aqui o token de acesso pra poder salvar direto no site. Isso só precisa ser feito uma vez neste celular.</p>
+  <input id="tokenInput" type="password" placeholder="ghp_xxx... ou github_pat_xxx...">
+  <button class="btn btn-primary" id="tokenSubmit" style="width:100%">Entrar</button>
+  <p><a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">como gerar meu token →</a></p>
+</div>
+
+<div id="app" style="display:none">
+  <div class="admin-strip">
+    <span>✎ modo edição</span>
+    <button id="logoutBtn">trocar token</button>
+  </div>
+  <div style="max-width:640px;margin:0 auto;padding:18px 16px 90px">
+    <header style="margin-bottom:16px">
+      <div style="font-weight:700;font-size:19px">Lista de compras — Itanhaém</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--text-dim)">04 a 08/09 · toca no campo e escreve direto</div>
+    </header>
+    <div id="days"></div>
+  </div>
+</div>
+
+<div class="bar" id="bar" style="display:none">
+  <button class="btn btn-secondary" id="clearBtn">Limpar tudo</button>
+  <button class="btn btn-primary" id="saveNowBtn">Salvar agora</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+  const gate = document.getElementById('gate');
+  const app = document.getElementById('app');
+  const bar = document.getElementById('bar');
+  const toast = document.getElementById('toast');
+  const TOKEN_KEY = 'itanhaem-gh-token';
+
+  function showToast(msg, ms){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(()=>toast.classList.remove('show'), ms || 2200);
+  }
+
+  function b64EncodeUtf8(str){ return btoa(unescape(encodeURIComponent(str))); }
+  function b64DecodeUtf8(str){ return decodeURIComponent(escape(atob(str))); }
+
+  function apiUrl(){ return `https://api.github.com/repos/${CFG.owner}/${CFG.repo}/contents/${CFG.path}`; }
+
+  let token = localStorage.getItem(TOKEN_KEY) || '';
+  let currentSha = null;
+  let currentData = null;
+
+  async function ghGet(){
+    const res = await fetch(apiUrl() + `?ref=${CFG.branch}&t=${Date.now()}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    if (!res.ok){
+      const body = await res.text().catch(()=> '');
+      throw new Error(`GET ${res.status}: ${body.slice(0,200)}`);
+    }
+    const json = await res.json();
+    currentSha = json.sha;
+    return JSON.parse(b64DecodeUtf8(json.content.replace(/\n/g,'')));
+  }
+
+  async function ghPut(dataObj){
+    // re-check sha right before writing to avoid clobbering a newer save
+    try{
+      const fresh = await fetch(apiUrl() + `?ref=${CFG.branch}&t=${Date.now()}`, {
+        headers: { Authorization: `Bearer ${token}` }, cache:'no-store'
+      });
+      if (fresh.ok){ const j = await fresh.json(); currentSha = j.sha; }
+    }catch(e){ /* keep last known sha */ }
+
+    const body = {
+      message: 'Atualiza lista de compras — ' + new Date().toLocaleString('pt-BR'),
+      content: b64EncodeUtf8(JSON.stringify(dataObj, null, 2)),
+      branch: CFG.branch,
+      sha: currentSha
+    };
+    const res = await fetch(apiUrl(), {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok){
+      const t = await res.text().catch(()=> '');
+      throw new Error(`PUT ${res.status}: ${t.slice(0,200)}`);
+    }
+    const json = await res.json();
+    currentSha = json.content.sha;
+  }
+
+  function findMoment(key){
+    for (const day of currentData.days){
+      for (const m of day.moments){
+        if (m.key === key) return m;
+      }
+    }
+    return null;
+  }
+
+  // ---------- save orchestration (debounced, serialized) ----------
+  let saveChain = Promise.resolve();
+  let saveTimer = null;
+  let globalTagEls = [];
+
+  function setGlobalStatus(msg, ok){
+    globalTagEls.forEach(el => {
+      el.textContent = msg;
+      el.classList.remove('ok','err');
+      if (ok === true) el.classList.add('ok');
+      if (ok === false) el.classList.add('err');
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(()=> el.classList.remove('show'), 2000);
+    });
+  }
+
+  function scheduleSave(){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(runSave, 700);
+  }
+
+  function runSave(){
+    saveChain = saveChain.then(doSave).catch(err => {
+      console.error(err);
+      setGlobalStatus('não salvou — verifica a internet', false);
+      showToast('Não consegui salvar agora. Vou tentar de novo.', 3000);
+    });
+    return saveChain;
+  }
+
+  async function doSave(){
+    document.querySelectorAll('textarea[data-key]').forEach(ta => {
+      const m = findMoment(ta.dataset.key);
+      if (m) m.text = ta.value;
+    });
+    currentData.lastUpdated = new Date().toISOString();
+    await ghPut(currentData);
+    setGlobalStatus('salvo ✓', true);
+  }
+
+  // ---------- build UI ----------
+  function build(){
+    const daysEl = document.getElementById('days');
+    daysEl.innerHTML = '';
+    currentData.days.forEach(day => {
+      const dayDiv = document.createElement('div');
+      dayDiv.className = 'day';
+      const head = document.createElement('div');
+      head.className = 'day-head';
+      head.innerHTML = `<span class="d-title">${day.day}</span>${day.meta ? `<span class="d-meta">${day.meta}</span>` : ''}`;
+      dayDiv.appendChild(head);
+
+      day.moments.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'moment';
+
+        const mHead = document.createElement('div');
+        mHead.className = 'm-head';
+        mHead.innerHTML = `<span class="m-title">${m.title}</span>${m.tag ? `<span class="badge${m.calm?' calm':''}">${m.tag}</span>` : ''}`;
+        card.appendChild(mHead);
+
+        if (m.hints && m.hints.length){
+          const hints = document.createElement('div');
+          hints.className = 'hints';
+          hints.textContent = 'dicas: ' + m.hints.join(' · ');
+          card.appendChild(hints);
+        }
+        if (m.highlight){
+          const hl = document.createElement('div');
+          hl.className = 'highlight';
+          hl.textContent = m.highlight;
+          card.appendChild(hl);
+        }
+
+        const ta = document.createElement('textarea');
+        ta.className = 'edit-box';
+        ta.placeholder = 'escreve aqui a lista de verdade...';
+        ta.dataset.key = m.key;
+        ta.value = m.text || '';
+        card.appendChild(ta);
+
+        const tag = document.createElement('div');
+        tag.className = 'save-tag';
+        tag.textContent = 'salvo ✓';
+        card.appendChild(tag);
+        globalTagEls.push(tag);
+
+        ta.addEventListener('input', scheduleSave);
+        ta.addEventListener('blur', () => { clearTimeout(saveTimer); runSave(); });
+
+        dayDiv.appendChild(card);
+      });
+      daysEl.appendChild(dayDiv);
+    });
+  }
+
+  // ---------- boot ----------
+  async function boot(){
+    if (CFG.owner === 'SEU-USUARIO-GITHUB' || CFG.repo === 'SEU-REPOSITORIO'){
+      gate.style.display = 'block';
+      document.getElementById('gateMsg').innerHTML =
+        '⚠️ Este arquivo (<code>editar.html</code>) ainda não foi configurado. ' +
+        'Abre o arquivo, edita <code>CFG.owner</code> e <code>CFG.repo</code> com o dono e o nome do repositório no GitHub, e publica de novo.';
+      document.getElementById('tokenInput').style.display = 'none';
+      document.getElementById('tokenSubmit').style.display = 'none';
+      return;
+    }
+
+    if (!token){
+      gate.style.display = 'block';
+      return;
+    }
+
+    try{
+      currentData = await ghGet();
+      gate.style.display = 'none';
+      app.style.display = 'block';
+      bar.style.display = 'flex';
+      build();
+    }catch(e){
+      console.error(e);
+      gate.style.display = 'block';
+      document.getElementById('gateMsg').textContent =
+        'O token salvo não funcionou (expirou ou não tem permissão nesse repositório). Cola um novo abaixo.';
+      token = '';
+      localStorage.removeItem(TOKEN_KEY);
+    }
+  }
+
+  document.getElementById('tokenSubmit').addEventListener('click', async () => {
+    const v = document.getElementById('tokenInput').value.trim();
+    if (!v) return;
+    token = v;
+    localStorage.setItem(TOKEN_KEY, v);
+    document.getElementById('gateMsg').textContent = 'Entrando...';
+    await boot();
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    if (!confirm('Trocar de token? Você vai precisar colar um novo.')) return;
+    localStorage.removeItem(TOKEN_KEY);
+    location.reload();
+  });
+
+  document.getElementById('saveNowBtn').addEventListener('click', () => {
+    clearTimeout(saveTimer);
+    runSave();
+    showToast('Salvando...');
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (!confirm('Apagar tudo que foi escrito?')) return;
+    document.querySelectorAll('textarea[data-key]').forEach(ta => ta.value = '');
+    runSave();
+  });
+
+  window.addEventListener('pagehide', () => { clearTimeout(saveTimer); if (currentData) doSave().catch(()=>{}); });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && currentData){
+      clearTimeout(saveTimer);
+      doSave().catch(()=>{});
+    }
+  });
+
+  boot();
+</script>
+</body>
+</html>

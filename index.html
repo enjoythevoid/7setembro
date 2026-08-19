@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Praia — Itanhaém</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <h1>Praia — Itanhaém</h1>
+    <div class="subtitle">04 a 08/09/2026</div>
+    <ul class="navlist">
+      <li><button data-page="dados" class="active"><span class="dot"></span>Dados</button></li>
+      <li><button data-page="carro"><span class="dot"></span>Carro / Aluguel</button></li>
+      <li><button data-page="caminho"><span class="dot"></span>Caminho</button></li>
+      <li><button data-page="gastos"><span class="dot"></span>Gastos</button></li>
+      <li><button data-page="compras"><span class="dot"></span>Lista de compras</button></li>
+      <li><button data-page="prefs"><span class="dot"></span>Preferências</button></li>
+    </ul>
+  </nav>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="menu-btn" id="menuBtn"><span></span></button>
+      <div>
+        <div class="t-title">Praia — Itanhaém</div>
+        <div class="t-sub">04 a 08/09 · 6 pessoas</div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ===== DADOS ===== -->
+      <section class="page active" id="page-dados">
+        <h2 class="section-title">Dados do rolê</h2>
+        <div class="section-sub">visão geral da viagem</div>
+
+        <div class="info-grid">
+          <div class="info-cell"><div class="lbl">Equipe</div><div class="val">6 pessoas</div></div>
+          <div class="info-cell"><div class="lbl">Local</div><div class="val">Rua Jasmim, Itanhaém</div></div>
+          <div class="info-cell"><div class="lbl">Ida</div><div class="val accent">04/09 · Sexta</div></div>
+          <div class="info-cell"><div class="lbl">Volta</div><div class="val accent">08/09 · 14:00</div></div>
+        </div>
+
+        <div class="card">
+          <h3>Cronograma</h3>
+
+          <div style="margin-bottom:14px">
+            <b>04/09 — Sexta</b><br>
+            <span style="font-size:13px;color:var(--text-dim)">Noite: jantar de chegada</span>
+          </div>
+          <div style="margin-bottom:14px">
+            <b>05/09 — Sábado</b><br>
+            <span style="font-size:13px">Manhã: café da manhã · praia<br>
+            Tarde: almoço<br>
+            Noite: churrasco</span>
+          </div>
+          <div style="margin-bottom:14px">
+            <b>06/09 — Domingo</b><br>
+            <span style="font-size:13px">Manhã: café da manhã · praia<br>
+            Tarde: almoço<br>
+            Noite: churrasco</span>
+          </div>
+          <div style="margin-bottom:4px">
+            <b>07/09 — Segunda</b><br>
+            <span style="font-size:13px">Manhã: café da manhã · praia<br>
+            Tarde: almoço<br>
+            Noite: jantar</span>
+          </div>
+          <div>
+            <b>08/09 — Terça</b><br>
+            <span style="font-size:13px">14:00 — devolução do carro, volta pra SP</span>
+          </div>
+        </div>
+
+        <div class="callout teal">
+          Pedro, Adriane, Carol e Rose vão de carro. Ellen e Thay vão de ônibus (ida e volta).
+        </div>
+      </section>
+
+      <!-- ===== CARRO ===== -->
+      <section class="page" id="page-carro">
+        <h2 class="section-title">Carro / Aluguel</h2>
+        <div class="section-sub">reserva e retirada</div>
+
+        <img class="photo hero-short" src="assets/carro-reserva.jpg" alt="Tela da reserva do carro">
+        <div class="photo-caption">print da reserva</div>
+
+        <div class="card">
+          <h3>VW Tera 1.0 ou similar</h3>
+          <div class="info-grid">
+            <div class="info-cell"><div class="lbl">Grupo</div><div class="val">G · SUV Manual</div></div>
+            <div class="info-cell"><div class="lbl">Diária</div><div class="val accent">R$ 81,95</div></div>
+            <div class="info-cell"><div class="lbl">Total (5 diárias)</div><div class="val accent">R$ 409,75</div></div>
+            <div class="info-cell"><div class="lbl">Devolução</div><div class="val accent">08/09 · 14:00</div></div>
+          </div>
+          <p style="font-size:13px;color:var(--text-dim);margin:0">
+            Não inclui a taxa de 15% de aluguel; parcelamento pode ter encargos. Carro vem com tanque cheio — devolve cheio também.
+          </p>
+        </div>
+
+        <div class="callout">
+          Na retirada, ver se tem automático disponível. Se não tiver, fica o manual mesmo, no valor já reservado.
+        </div>
+      </section>
+
+      <!-- ===== CAMINHO ===== -->
+      <section class="page" id="page-caminho">
+        <h2 class="section-title">Caminho</h2>
+        <div class="section-sub">rota até Itanhaém</div>
+
+        <div class="gallery">
+          <div class="g-item"><img src="assets/casa-frente.jpg" alt="Frente da casa"><span class="g-cap">a casa</span></div>
+          <div class="g-item"><img src="assets/foto1.jpg" alt="Rede na varanda"><span class="g-cap">rede</span></div>
+          <div class="g-item"><img src="assets/foto2.jpg" alt="Comendo na varanda"><span class="g-cap">lanchinho</span></div>
+          <div class="g-item"><img src="assets/foto3.jpg" alt="Explorando o entorno"><span class="g-cap">arredores</span></div>
+          <div class="g-item"><img src="assets/foto4.jpg" alt="Pé de jaca no quintal"><span class="g-cap">pé de jaca</span></div>
+          <div class="g-item"><img src="assets/foto6.jpg" alt="Churrasco no forno de tijolo"><span class="g-cap">forno</span></div>
+          <div class="g-item"><img src="assets/foto7.jpg" alt="Saguis no muro"><span class="g-cap">saguis</span></div>
+        </div>
+
+        <div class="card">
+          <div class="route">
+            <div class="stop">
+              <div class="stop-name">Rua Savério Valente, 100</div>
+              <div class="stop-detail">Parque Nações Unidas / Jaraguá — saída</div>
+            </div>
+            <div class="stop">
+              <div class="stop-name">Estação Jaraguá</div>
+              <div class="stop-detail">embarque · Adriane</div>
+              <div class="stop-leg">perna anterior: <b>~3 km</b></div>
+            </div>
+            <div class="stop">
+              <div class="stop-name">17º Oficial de Registro de Imóveis</div>
+              <div class="stop-detail">Rua Japurá, 43 — Bela Vista — embarque · Carol e Rose</div>
+              <div class="stop-leg">perna anterior: <b>~21 km</b> · zona norte → centro</div>
+            </div>
+            <div class="stop final">
+              <div class="stop-name">Rua Jasmim, Itanhaém</div>
+              <div class="stop-detail">chegada</div>
+              <div class="stop-leg">perna anterior: <b>~113 km</b> · via Anchieta/Imigrantes ou Rio-Santos</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>~138 km</b> na ida (1h45–2h30, depende do trânsito de feriado). Pra devolver o carro às 14h no dia 08, vale sair de Itanhaém até <b>10h–10h30</b> — a Rio-Santos/Anchieta costuma travar na volta de feriado prolongado.
+        </div>
+        <div class="callout teal">
+          Combustível estimado: ~300–320 km no total (ida + volta + deslocamentos locais). Tera 1.0 TSI faz ~13 km/l na gasolina → uns 23–24 L → cerca de <b>R$ 145–160</b>.
+        </div>
+      </section>
+
+      <!-- ===== GASTOS ===== -->
+      <section class="page" id="page-gastos">
+        <h2 class="section-title">Gastos</h2>
+        <div class="section-sub">orçamento estimado · preços reais de mercado (SP, ago/2026)</div>
+
+        <div class="card">
+          <div class="budget-row"><div class="budget-label">Aluguel do carro<small>5 diárias · quem vai de carro</small></div><div class="budget-value">R$ 409,75</div></div>
+          <div class="budget-row"><div class="budget-label">Combustível<small>~300–320 km · quem vai de carro</small></div><div class="budget-value">R$ 145–160</div></div>
+          <div class="budget-row"><div class="budget-label">Jantar de chegada<small>04/09</small></div><div class="budget-value">R$ 22</div></div>
+          <div class="budget-row"><div class="budget-label">Churrasco<small>2 noites</small></div><div class="budget-value">R$ 199</div></div>
+          <div class="budget-row"><div class="budget-label">Café da manhã<small>3 dias</small></div><div class="budget-value">R$ 110</div></div>
+          <div class="budget-row"><div class="budget-label">Almoço<small>3 dias</small></div><div class="budget-value">R$ 75</div></div>
+          <div class="budget-row"><div class="budget-label">Bebidas alcoólicas<small>5 ocasiões + almoço opcional</small></div><div class="budget-value">R$ 234</div></div>
+          <div class="budget-row"><div class="budget-label">Água, gelo, descartáveis<small></small></div><div class="budget-value">R$ 93</div></div>
+
+          <div class="budget-row total"><div class="budget-label">Total</div><div class="budget-value">≈ R$ 1.290–1.305</div></div>
+          <div class="per-person">carro ÷ 4 · comida/bebida ÷ 6</div>
+
+          <div class="per-person-cards">
+            <div class="pp-card"><div class="name">Pedro</div><div class="amt">≈ R$ 263</div></div>
+            <div class="pp-card"><div class="name">Adriane</div><div class="amt">≈ R$ 263</div></div>
+            <div class="pp-card"><div class="name">Carol</div><div class="amt">≈ R$ 263</div></div>
+            <div class="pp-card"><div class="name">Rose</div><div class="amt">≈ R$ 263</div></div>
+            <div class="pp-card"><div class="name">Thay</div><div class="amt">≈ R$ 122</div></div>
+            <div class="pp-card"><div class="name">Ellen</div><div class="amt">≈ R$ 122</div></div>
+          </div>
+        </div>
+
+        <div class="callout">
+          Aluguel do carro e combustível são divididos só entre quem vai de carro (Pedro, Adriane, Carol e Rose) — uns <b>R$ 141</b> a mais por pessoa. Comida, água e bebida entram pra todo mundo (6 pessoas), uns <b>R$ 122</b> cada. Ellen e Thay vão e voltam de ônibus, então só pagam a parte da comida.
+        </div>
+
+        <div class="callout">
+          Valores da carne, bebida e outros itens variam por rede — isso é referência, não orçamento fechado. Se marcar os itens opcionais (fardo extra, macarrão de emergência), soma mais uns R$ 47 no total.
+        </div>
+      </section>
+
+      <!-- ===== COMPRAS (view only) ===== -->
+      <section class="page" id="page-compras">
+        <h2 class="section-title">Lista de compras</h2>
+        <div class="section-sub" id="comprasSub">carregando…</div>
+        <div id="comprasContent"></div>
+      </section>
+
+      <!-- ===== PREFERÊNCIAS ===== -->
+      <section class="page" id="page-prefs">
+        <h2 class="section-title">Preferências</h2>
+        <div class="section-sub">o que você quer comer, manda pro Pedro</div>
+
+        <div class="card">
+          <div class="pref-field">
+            <label>Seu nome</label>
+            <input type="text" id="prefNome" placeholder="ex: Adriane">
+          </div>
+          <div class="pref-field">
+            <label>O que você quer comer / sugestões</label>
+            <textarea id="prefQuer" placeholder="ex: pão de alho, mais fruta no café..."></textarea>
+          </div>
+          <div class="pref-field">
+            <label>Restrições ou preferências alimentares</label>
+            <textarea id="prefRestricoes" placeholder="ex: vegetariano, sem lactose, sem picante..."></textarea>
+          </div>
+          <div class="pref-field">
+            <label>O que você NÃO gosta / não come</label>
+            <textarea id="prefNaoGosta" placeholder="ex: não como coração de frango, não gosto de maionese..."></textarea>
+          </div>
+          <button class="btn btn-primary" id="sendPrefBtn" style="width:100%">Enviar por e-mail</button>
+          <p style="font-size:11.5px;color:var(--text-dim);margin:10px 0 0">
+            Isso abre o app de e-mail do seu celular com tudo já preenchido, endereçado pro Pedro — só falta apertar enviar.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------- sidebar / nav ----------
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('overlay');
+  const menuBtn = document.getElementById('menuBtn');
+  function openMenu(){ sidebar.classList.add('open'); overlay.classList.add('show'); }
+  function closeMenu(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+  menuBtn.addEventListener('click', () => sidebar.classList.contains('open') ? closeMenu() : openMenu());
+  overlay.addEventListener('click', closeMenu);
+
+  document.querySelectorAll('.navlist button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.navlist button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + btn.dataset.page).classList.add('active');
+      closeMenu();
+      window.scrollTo(0,0);
+      if (btn.dataset.page === 'compras') loadCompras();
+    });
+  });
+
+  // ---------- compras (read-only, fetched from data/compras.json) ----------
+  let comprasLoaded = false;
+  async function loadCompras(){
+    if (comprasLoaded) return;
+    const sub = document.getElementById('comprasSub');
+    const wrap = document.getElementById('comprasContent');
+    try{
+      const res = await fetch('data/compras.json?t=' + Date.now(), {cache:'no-store'});
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+      comprasLoaded = true;
+
+      sub.textContent = data.lastUpdated
+        ? 'atualizado em ' + new Date(data.lastUpdated).toLocaleString('pt-BR')
+        : 'ainda sem atualizações';
+
+      wrap.innerHTML = '';
+      data.days.forEach(day => {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'day';
+        const head = document.createElement('div');
+        head.className = 'day-head';
+        head.innerHTML = `<span class="d-title">${escapeHtml(day.day)}</span>${day.meta ? `<span class="d-meta">${escapeHtml(day.meta)}</span>` : ''}`;
+        dayDiv.appendChild(head);
+
+        day.moments.forEach(m => {
+          const card = document.createElement('div');
+          card.className = 'moment';
+          let html = `<div class="m-head"><span class="m-title">${escapeHtml(m.title)}</span>`;
+          if (m.tag) html += `<span class="badge${m.calm ? ' calm' : ''}">${escapeHtml(m.tag)}</span>`;
+          html += `</div>`;
+          if (m.hints && m.hints.length) html += `<div class="hints">dicas: ${m.hints.map(escapeHtml).join(' · ')}</div>`;
+          if (m.highlight) html += `<div class="highlight">${escapeHtml(m.highlight)}</div>`;
+          if (m.text && m.text.trim()){
+            html += `<div class="written">${escapeHtml(m.text)}</div>`;
+          } else {
+            html += `<div class="written empty">ainda não preenchido</div>`;
+          }
+          card.innerHTML = html;
+          dayDiv.appendChild(card);
+        });
+        wrap.appendChild(dayDiv);
+      });
+    }catch(e){
+      sub.textContent = 'não consegui carregar a lista agora — tenta de novo em instantes';
+    }
+  }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  // ---------- preferências → mailto ----------
+  document.getElementById('sendPrefBtn').addEventListener('click', () => {
+    const nome = document.getElementById('prefNome').value.trim();
+    const quer = document.getElementById('prefQuer').value.trim();
+    const restricoes = document.getElementById('prefRestricoes').value.trim();
+    const naoGosta = document.getElementById('prefNaoGosta').value.trim();
+
+    if (!nome){
+      alert('Coloca seu nome antes de enviar :)');
+      return;
+    }
+
+    const subject = `Preferências de comida — ${nome} (Itanhaém)`;
+    const body =
+`Nome: ${nome}
+
+O que quer comer / sugestões:
+${quer || '-'}
+
+Restrições / preferências alimentares:
+${restricoes || '-'}
+
+O que NÃO gosta / não come:
+${naoGosta || '-'}`;
+
+    const mailto = `mailto:01.pedrohenriquesilva@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+</script>
+</body>
+</html>
